@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-const BG_IMAGE_1 = 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260609_195923_b0ba8ace-1d1d-4f2c-9a28-1ab84b330680.png&w=1280&q=85';
-const BG_IMAGE_2 = 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260609_201152_bba90a12-bf12-459f-91f0-51f237dbaf3b.png&w=1280&q=85';
+const BG_IMAGE_1 = import.meta.env.BASE_URL + 'images/layer-1.webp';
+const BG_IMAGE_2 = import.meta.env.BASE_URL + 'images/layer-2.webp';
 const SPOTLIGHT_R = 260;
 function RevealLayer({image,cursorX,cursorY}:{image:string;cursorX:number;cursorY:number}) {
   const canvasRef=useRef<HTMLCanvasElement>(null);
@@ -46,7 +46,7 @@ export default function App(){
       <div className="absolute bottom-10 sm:bottom-24 left-5 right-5 sm:left-auto sm:right-10 md:right-14 max-w-full sm:max-w-[260px] flex flex-col items-start gap-4 sm:gap-5 z-50 hero-anim hero-fade" style={{animationDelay:'0.85s'}}><p className="text-xs sm:text-sm text-white/80 leading-relaxed">Our interactive maps let you peel back the crust to trace how stones, fossils, and deep time combine to shape the ground beneath your feet.</p><button onClick={dig} className="bg-[#e8702a] hover:bg-[#d2611f] text-white text-sm font-medium px-7 py-3 rounded-full transition-all hover:scale-[1.03] active:scale-95 hover:shadow-lg hover:shadow-[#e8702a]/30">Start Digging</button></div>
     </section>
     <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between p-4 sm:p-5" aria-label="Main navigation">
-      <a href="/" className="flex items-center gap-2.5" aria-label="Lithos home"><svg width="26" height="26" viewBox="0 0 256 256" fill="#ffffff" aria-hidden="true"><path d="M 256 256 L 128 256 L 0 128 L 128 128 Z M 256 128 L 128 128 L 0 0 L 128 0 Z"/></svg><span className="text-white text-2xl font-playfair italic">Lithos</span></a>
+      <a href={import.meta.env.BASE_URL} className="flex items-center gap-2.5" aria-label="Lithos home"><svg width="26" height="26" viewBox="0 0 256 256" fill="#ffffff" aria-hidden="true"><path d="M 256 256 L 128 256 L 0 128 L 128 128 Z M 256 128 L 128 128 L 0 0 L 128 0 Z"/></svg><span className="text-white text-2xl font-playfair italic">Lithos</span></a>
       <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full px-2 py-2 items-center gap-1">{links.map(link=><button key={link} onClick={()=>choose(link)} aria-current={active===link?'page':undefined} className={`px-4 py-1.5 rounded-full text-sm font-medium hover:bg-white/20 hover:text-white transition-colors ${active===link?'text-white':'text-white/80'}`}>{link}</button>)}</div>
       <button className="hidden md:block bg-white text-gray-900 text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-gray-100" onClick={()=>{setActive('Sign Up');dialogRef.current?.showModal()}}>Sign Up</button>
       <button className="md:hidden text-white p-2 rounded-full hover:bg-white/20" onClick={()=>setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="mobile-menu" aria-label={menuOpen?'Close menu':'Open menu'}>{menuOpen?<X size={24}/>:<Menu size={24}/>}</button>
